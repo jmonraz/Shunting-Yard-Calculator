@@ -4,8 +4,8 @@
 //	EVT_BUTTON(10001, OnButtonClicked)
 //wxEND_EVENT_TABLE()
 
-#define WINDOW_WIDTH 400
-#define WINDOW_HEIGHT 700
+#define WINDOW_WIDTH 390
+#define WINDOW_HEIGHT 600
 
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), wxSize(WINDOW_WIDTH, WINDOW_HEIGHT)) {
 	wxFont font(16, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
@@ -48,13 +48,20 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button = new wxButton(this, wxID_ANY, "/", wxPoint(275, 300), wxSize(75, 75));
 	button->SetFont(font);
 	//row 5
-	button = new wxButton(this, wxID_ANY, "-|+", wxPoint(20, 380), wxSize(75, 75));
+	button = new wxButton(this, wxID_ANY, "-/+", wxPoint(20, 380), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "0", wxPoint(105, 380), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "C", wxPoint(190, 380), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "%", wxPoint(275, 380), wxSize(75, 75));
+	button->SetFont(font);
+	//row 6
+	button = new wxButton(this, wxID_ANY, "=", wxPoint(20, 460), wxSize(160, 75));
+	button->SetFont(font);
+	button = new wxButton(this, wxID_ANY, "(", wxPoint(190, 460), wxSize(75, 75));
+	button->SetFont(font);
+	button = new wxButton(this, wxID_ANY, ")", wxPoint(275, 460), wxSize(75, 75));
 	button->SetFont(font);
 }
 
