@@ -9,14 +9,9 @@ public:
 	~Window();
 
 public:
-	wxButton* button1 = nullptr;
-	wxButton* button2 = nullptr;
-	wxTextCtrl* textBox = nullptr;
-	wxListBox* listBox = nullptr;
+	wxTextCtrl* textbox = nullptr;
+	wxButton* button = nullptr;
 
-	void OnButtonClicked(wxCommandEvent& evt);
-	void OnButtonClickedDelete(wxCommandEvent& evt);
-
-	wxDECLARE_EVENT_TABLE();
+	/*wxDECLARE_EVENT_TABLE();*/
 };
 
