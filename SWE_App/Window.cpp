@@ -63,6 +63,8 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, ")", wxPoint(275, 460), wxSize(75, 75));
 	button->SetFont(font);
+
+	this->SetWindowStyle(wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER) & ~(wxMAXIMIZE_BOX));
 }
 
 Window::~Window() {
