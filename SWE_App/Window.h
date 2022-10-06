@@ -12,6 +12,7 @@ public:
 	wxTextCtrl* textbox = nullptr;
 	wxButton* button = nullptr;
 	wxButton* clearButton = nullptr;
+	wxButton* equalsButton = nullptr;
 
 	void OnButtonClicked(wxCommandEvent& evt);
 	void OnButtonClear(wxCommandEvent& evt);

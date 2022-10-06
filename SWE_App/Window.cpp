@@ -18,7 +18,7 @@ wxBEGIN_EVENT_TABLE(Window, wxFrame)
 	EVT_BUTTON(MODULUS, OnButtonClicked)
 	EVT_BUTTON(RIGHT, OnButtonClicked)
 	EVT_BUTTON(LEFT, OnButtonClicked)
-	EVT_BUTTON(10001, OnButtonClicked)
+	EVT_BUTTON(EQUALS, OnButtonClicked)
 	EVT_BUTTON(10000, OnButtonClear)
 wxEND_EVENT_TABLE()
 
@@ -75,7 +75,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button = new wxButton(this, MODULUS, "%", wxPoint(275, 380), wxSize(75, 75));
 	button->SetFont(font);
 	//row 6
-	button = new wxButton(this, EQUALS, "=", wxPoint(20, 460), wxSize(160, 75));
+	equalsButton = new wxButton(this, EQUALS, "=", wxPoint(20, 460), wxSize(160, 75));
 	button->SetFont(font);
 	button = new wxButton(this, LEFT, "(", wxPoint(190, 460), wxSize(75, 75));
 	button->SetFont(font);
@@ -91,8 +91,6 @@ Window::~Window() {
 
 void Window::OnButtonClicked(wxCommandEvent& evt)
 {
-	/*textbox->AppendText(evt.GetString());*/
-
 	BUTTONS id = (BUTTONS)evt.GetId();
 
 	switch (id)
@@ -149,6 +147,34 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 		textbox->AppendText(")");
 		break;
 	case Window::EQUALS:
+		std::string calculation = "";
+		calculation.append(textbox->GetValue());
+
+		int number1 = 0;
+		int number2 = 0;
+		char oper;
+		std::string temp;
+		
+		for (int i = 0; i < calculation.size(); i++)
+		{
+			
+			if (calculation[0] == '1' || calculation[0] == '2' || calculation[0] == '3' || calculation[0] == '4' || calculation[0] == '5' || calculation[0] == '6' || calculation[0] == '7' || calculation[0] == '8' || calculation[0] == '9' || calculation[0] == '0')
+			{
+				
+				temp += calculation[0];
+				calculation.erase(0, 1);
+				number1 = std::stoi(temp);
+			}
+			if (calculation[0] == '+' || calculation[0] == '-' || calculation[0] == '*' || calculation[0] == '/' || calculation[0] == '%')
+			{
+				
+				oper = calculation[0];
+				calculation.erase(0, 1);
+				number2 = std::stoi(calculation);
+				break;
+			}
+			
+		}
 		break;
 	}
 
@@ -166,3 +192,4 @@ void Window::OnButtonConvert(wxCommandEvent& evt)
 {
 	
 }
+
