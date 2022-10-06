@@ -16,5 +16,13 @@ public:
 	void OnButtonClicked(wxCommandEvent& evt);
 	void OnButtonClear(wxCommandEvent& evt);
 	wxDECLARE_EVENT_TABLE();
+
+	enum BUTTONS
+	{
+		ONE,
+		PLUS,
+		SIX,
+		EQUALS
+	};
 };
 

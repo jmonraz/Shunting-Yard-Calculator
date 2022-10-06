@@ -1,7 +1,9 @@
 #include "Window.h"
 
 wxBEGIN_EVENT_TABLE(Window, wxFrame)
-	EVT_BUTTON(10001, OnButtonClicked)
+	EVT_BUTTON(ONE, OnButtonClicked)
+	EVT_BUTTON(PLUS, OnButtonClicked)
+	EVT_BUTTON(SIX, OnButtonClicked)
 	EVT_BUTTON(10000, OnButtonClear)
 wxEND_EVENT_TABLE()
 
@@ -19,10 +21,10 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "Tan", wxPoint(190, 60), wxSize(75, 75));
 	button->SetFont(font);
-	button = new wxButton(this, wxID_ANY, "+", wxPoint(275, 60), wxSize(75, 75));
+	button = new wxButton(this, PLUS, "+", wxPoint(275, 60), wxSize(75, 75));
 	button->SetFont(font);
 	// row 2
-	button = new wxButton(this, wxID_ANY, "1", wxPoint(20, 140), wxSize(75, 75));
+	button = new wxButton(this, ONE, "1", wxPoint(20, 140), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "2", wxPoint(105, 140), wxSize(75, 75));
 	button->SetFont(font);
@@ -35,7 +37,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "5", wxPoint(105, 220), wxSize(75, 75));
 	button->SetFont(font);
-	button = new wxButton(this, wxID_ANY, "6", wxPoint(190, 220), wxSize(75, 75));
+	button = new wxButton(this, SIX, "6", wxPoint(190, 220), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "*", wxPoint(275, 220), wxSize(75, 75));
 	button->SetFont(font);
@@ -58,7 +60,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button = new wxButton(this, wxID_ANY, "%", wxPoint(275, 380), wxSize(75, 75));
 	button->SetFont(font);
 	//row 6
-	button = new wxButton(this, wxID_ANY, "=", wxPoint(20, 460), wxSize(160, 75));
+	button = new wxButton(this, EQUALS, "=", wxPoint(20, 460), wxSize(160, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "(", wxPoint(190, 460), wxSize(75, 75));
 	button->SetFont(font);
@@ -74,7 +76,24 @@ Window::~Window() {
 
 void Window::OnButtonClicked(wxCommandEvent& evt)
 {
-	textbox->AppendText(button->GetLabel());
+	/*textbox->AppendText(evt.GetString());*/
+
+	BUTTONS id = (BUTTONS)evt.GetId();
+
+	switch (id)
+	{
+	case Window::ONE:
+		textbox->AppendText("1");
+		break;
+	case Window::PLUS:
+		textbox->AppendText("+");
+		break;
+	case Window::SIX:
+		textbox->AppendText("6");
+		break;
+	case Window::EQUALS:
+		break;
+	}
 
 	evt.Skip();
 }
