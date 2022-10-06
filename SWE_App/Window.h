@@ -15,6 +15,7 @@ public:
 
 	void OnButtonClicked(wxCommandEvent& evt);
 	void OnButtonClear(wxCommandEvent& evt);
+	void OnButtonConvert(wxCommandEvent& evt);
 	wxDECLARE_EVENT_TABLE();
 
 	enum BUTTONS
@@ -34,7 +35,9 @@ public:
 		MULTIPLY,
 		DIVIDE,
 		MODULUS,
-		EQUALS
+		EQUALS,
+		RIGHT,
+		LEFT
 	};
 };
 

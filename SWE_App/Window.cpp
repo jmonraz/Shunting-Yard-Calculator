@@ -16,6 +16,8 @@ wxBEGIN_EVENT_TABLE(Window, wxFrame)
 	EVT_BUTTON(MULTIPLY, OnButtonClicked)
 	EVT_BUTTON(DIVIDE, OnButtonClicked)
 	EVT_BUTTON(MODULUS, OnButtonClicked)
+	EVT_BUTTON(RIGHT, OnButtonClicked)
+	EVT_BUTTON(LEFT, OnButtonClicked)
 	EVT_BUTTON(10001, OnButtonClicked)
 	EVT_BUTTON(10000, OnButtonClear)
 wxEND_EVENT_TABLE()
@@ -75,9 +77,9 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	//row 6
 	button = new wxButton(this, EQUALS, "=", wxPoint(20, 460), wxSize(160, 75));
 	button->SetFont(font);
-	button = new wxButton(this, wxID_ANY, "(", wxPoint(190, 460), wxSize(75, 75));
+	button = new wxButton(this, LEFT, "(", wxPoint(190, 460), wxSize(75, 75));
 	button->SetFont(font);
-	button = new wxButton(this, wxID_ANY, ")", wxPoint(275, 460), wxSize(75, 75));
+	button = new wxButton(this, RIGHT, ")", wxPoint(275, 460), wxSize(75, 75));
 	button->SetFont(font);
 
 	this->SetWindowStyle(wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER) & ~(wxMAXIMIZE_BOX));
@@ -140,6 +142,12 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 	case Window::MODULUS:
 		textbox->AppendText("%");
 		break;
+	case Window::LEFT:
+		textbox->AppendText("(");
+		break;
+	case Window::RIGHT:
+		textbox->AppendText(")");
+		break;
 	case Window::EQUALS:
 		break;
 	}
@@ -152,4 +160,9 @@ void Window::OnButtonClear(wxCommandEvent& evt)
 	textbox->Clear();
 
 	evt.Skip();
+}
+
+void Window::OnButtonConvert(wxCommandEvent& evt)
+{
+	
 }
