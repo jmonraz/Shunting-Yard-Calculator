@@ -16,7 +16,6 @@ public:
 
 	void OnButtonClicked(wxCommandEvent& evt);
 	void OnButtonClear(wxCommandEvent& evt);
-	void OnButtonConvert(wxCommandEvent& evt);
 	wxDECLARE_EVENT_TABLE();
 
 	enum BUTTONS

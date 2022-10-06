@@ -228,8 +228,3 @@ void Window::OnButtonClear(wxCommandEvent& evt)
 	evt.Skip();
 }
 
-void Window::OnButtonConvert(wxCommandEvent& evt)
-{
-	
-}
-
