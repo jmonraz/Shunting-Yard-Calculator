@@ -152,7 +152,7 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 
 		int number1 = 0;
 		int number2 = 0;
-		char oper;
+		char oper = 'a';
 		std::string temp;
 		
 		for (int i = 0; i < calculation.size(); i++)
@@ -175,7 +175,43 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 			}
 			
 		}
-		break;
+
+		int total{ 0 };
+		wxString intString;
+		
+		switch (oper)
+		{
+		case '+':
+			total = number1 + number2;
+			intString << total;
+			textbox->Clear();
+			textbox->AppendText(intString);
+			break;
+		case '-':
+			total = number1 - number2;
+			intString << total;
+			textbox->Clear();
+			textbox->AppendText(intString);
+			break;
+		case '*':
+			total = number1 * number2;
+			intString << total;
+			textbox->Clear();
+			textbox->AppendText(intString);
+			break;
+		case '/':
+			total = number1 / number2;
+			intString << total;
+			textbox->Clear();
+			textbox->AppendText(intString);
+			break;
+		case '%':
+			total = number1 % number2;
+			intString << total;
+			textbox->Clear();
+			textbox->AppendText(intString);
+			break;
+		}
 	}
 
 	evt.Skip();
