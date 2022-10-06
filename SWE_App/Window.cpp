@@ -1,8 +1,9 @@
 #include "Window.h"
 
-//wxBEGIN_EVENT_TABLE(Window, wxFrame)
-//	EVT_BUTTON(10001, OnButtonClicked)
-//wxEND_EVENT_TABLE()
+wxBEGIN_EVENT_TABLE(Window, wxFrame)
+	EVT_BUTTON(10001, OnButtonClicked)
+	EVT_BUTTON(10000, OnButtonClear)
+wxEND_EVENT_TABLE()
 
 #define WINDOW_WIDTH 390
 #define WINDOW_HEIGHT 600
@@ -12,7 +13,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	textbox = new wxTextCtrl(this, wxID_ANY, "", wxPoint(20, 10), wxSize(330, 40));
 	textbox->SetFont(font);
 	// row 1
-	button = new wxButton(this, wxID_ANY, "Sin", wxPoint(20, 60), wxSize(75, 75));
+	button = new wxButton(this, 10001, "Sin", wxPoint(20, 60), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "Cos", wxPoint(105, 60), wxSize(75, 75));
 	button->SetFont(font);
@@ -52,7 +53,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "0", wxPoint(105, 380), wxSize(75, 75));
 	button->SetFont(font);
-	button = new wxButton(this, wxID_ANY, "C", wxPoint(190, 380), wxSize(75, 75));
+	clearButton = new wxButton(this, 10000, "C", wxPoint(190, 380), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "%", wxPoint(275, 380), wxSize(75, 75));
 	button->SetFont(font);
@@ -69,4 +70,18 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 
 Window::~Window() {
 
+}
+
+void Window::OnButtonClicked(wxCommandEvent& evt)
+{
+	textbox->AppendText(button->GetLabel());
+
+	evt.Skip();
+}
+
+void Window::OnButtonClear(wxCommandEvent& evt)
+{
+	textbox->Clear();
+
+	evt.Skip();
 }

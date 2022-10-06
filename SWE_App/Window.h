@@ -11,7 +11,10 @@ public:
 public:
 	wxTextCtrl* textbox = nullptr;
 	wxButton* button = nullptr;
+	wxButton* clearButton = nullptr;
 
-	/*wxDECLARE_EVENT_TABLE();*/
+	void OnButtonClicked(wxCommandEvent& evt);
+	void OnButtonClear(wxCommandEvent& evt);
+	wxDECLARE_EVENT_TABLE();
 };
 
