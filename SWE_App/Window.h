@@ -20,8 +20,20 @@ public:
 	enum BUTTONS
 	{
 		ONE,
-		PLUS,
+		TWO,
+		THREE,
+		FOUR,
+		FIVE,
 		SIX,
+		SEVEN,
+		EIGHT,
+		NINE,
+		ZERO,
+		PLUS,
+		MINUS,
+		MULTIPLY,
+		DIVIDE,
+		MODULUS,
 		EQUALS
 	};
 };
