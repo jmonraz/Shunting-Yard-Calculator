@@ -19,6 +19,7 @@ wxBEGIN_EVENT_TABLE(Window, wxFrame)
 	EVT_BUTTON(RIGHT, OnButtonClicked)
 	EVT_BUTTON(LEFT, OnButtonClicked)
 	EVT_BUTTON(EQUALS, OnButtonClicked)
+	EVT_BUTTON(NEGATIVE, OnButtonClicked)
 	EVT_BUTTON(10000, OnButtonClear)
 wxEND_EVENT_TABLE()
 
@@ -30,7 +31,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	textbox = new wxTextCtrl(this, wxID_ANY, "", wxPoint(20, 10), wxSize(330, 40));
 	textbox->SetFont(font);
 	// row 1
-	button = new wxButton(this, 10001, "Sin", wxPoint(20, 60), wxSize(75, 75));
+	button = new wxButton(this, wxID_ANY, "Sin", wxPoint(20, 60), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, wxID_ANY, "Cos", wxPoint(105, 60), wxSize(75, 75));
 	button->SetFont(font);
@@ -66,7 +67,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	button = new wxButton(this, DIVIDE, "/", wxPoint(275, 300), wxSize(75, 75));
 	button->SetFont(font);
 	//row 5
-	button = new wxButton(this, wxID_ANY, "-/+", wxPoint(20, 380), wxSize(75, 75));
+	button = new wxButton(this, NEGATIVE, "-/+", wxPoint(20, 380), wxSize(75, 75));
 	button->SetFont(font);
 	button = new wxButton(this, ZERO, "0", wxPoint(105, 380), wxSize(75, 75));
 	button->SetFont(font);
@@ -145,6 +146,9 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 		break;
 	case Window::RIGHT:
 		textbox->AppendText(")");
+		break;
+	case Window::NEGATIVE:
+		textbox->AppendText("-");
 		break;
 	case Window::EQUALS:
 		std::string calculation = "";

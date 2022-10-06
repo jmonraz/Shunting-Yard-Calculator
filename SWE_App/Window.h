@@ -38,7 +38,8 @@ public:
 		MODULUS,
 		EQUALS,
 		RIGHT,
-		LEFT
+		LEFT,
+		NEGATIVE
 	};
 };
 
