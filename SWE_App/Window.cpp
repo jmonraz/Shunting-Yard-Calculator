@@ -19,7 +19,7 @@ wxBEGIN_EVENT_TABLE(Window, wxFrame)
 	EVT_BUTTON(RIGHT, OnButtonClicked)
 	EVT_BUTTON(LEFT, OnButtonClicked)
 	EVT_BUTTON(EQUALS, OnButtonClicked)
-	EVT_BUTTON(NEGATIVE, OnButtonClicked)
+	EVT_BUTTON(NEGATIVE, OnButtonNegative)
 	EVT_BUTTON(10000, OnButtonClear)
 wxEND_EVENT_TABLE()
 
@@ -147,9 +147,7 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 	case Window::RIGHT:
 		textbox->AppendText(")");
 		break;
-	case Window::NEGATIVE:
-		textbox->AppendText("-");
-		break;
+	
 	case Window::EQUALS:
 		std::string calculation = "";
 		calculation.append(textbox->GetValue());
@@ -216,6 +214,7 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 			textbox->AppendText(intString);
 			break;
 		}
+		break;
 	}
 
 	evt.Skip();
@@ -225,6 +224,30 @@ void Window::OnButtonClear(wxCommandEvent& evt)
 {
 	textbox->Clear();
 
+	evt.Skip();
+}
+
+void Window::OnButtonNegative(wxCommandEvent& evt)
+{
+	std::string cal = "";
+	cal.append(textbox->GetValue());
+	for (int i = 0; i < cal.size(); i++)
+	{
+		if (cal[i] == '-' || cal[i] == '+' || cal[i] == '*' || cal[i] == '/' || cal[i] == '%' || cal[i] == '-')
+		{
+			if (cal[i + 1] == '-')
+			{
+				cal.erase(cal.begin()+i+1);
+				break;
+			}
+			else {
+				cal.insert(i + 1, 1, '-');
+				break;
+			}
+		}
+	}
+	textbox->Clear();
+	textbox->AppendText(cal);
 	evt.Skip();
 }
 
