@@ -21,3 +21,11 @@ wxButton* ButtonFactory::CreateEqualsButton(Window* win, wxWindowID id, const wx
 	button->Bind(wxEVT_BUTTON, &Window::OnButtonEquals, win);
 	return button;
 }
+
+wxButton* ButtonFactory::CreateNegativeButton(Window* win, wxWindowID id, const wxString str, const wxPoint point, const wxSize size, const wxFont font)
+{
+	wxButton* button = new wxButton(win, id, str, point, size);
+	button->SetFont(font);
+	button->Bind(wxEVT_BUTTON, &Window::OnButtonNegative, win);
+	return button;
+}

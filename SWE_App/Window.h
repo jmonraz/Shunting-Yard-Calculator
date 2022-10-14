@@ -17,6 +17,7 @@ public:
 	void OnButtonClicked(wxCommandEvent& evt);
 	void OnButtonClear(wxCommandEvent& evt);
 	void OnButtonNegative(wxCommandEvent& evt);
+	void OnButtonEquals(wxCommandEvent& evt);
 	wxDECLARE_EVENT_TABLE();
 
 	enum BUTTONS
@@ -39,7 +40,11 @@ public:
 		EQUALS,
 		RIGHT,
 		LEFT,
-		NEGATIVE
+		NEGATIVE,
+		COS,
+		SIN,
+		TAN,
+		CLEAR
 	};
 };
 
