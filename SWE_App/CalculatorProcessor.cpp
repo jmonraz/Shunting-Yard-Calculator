@@ -271,7 +271,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 				}
 				if (operators.empty())
 				{
-					out = "Error!! Error!!";
+					error = "Error!! Error!!";
 					break;
 				}
 			}
@@ -298,7 +298,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 	{
 		if (operators.top() == ")" || operators.top() == "(")
 		{
-			out = "Error!";
+			error = "Error!";
 			break;
 		}
 		if (operators.top() != "(")
@@ -346,7 +346,6 @@ std::string CalculatorProcessor::ConvertString(std::string str)
 
 float CalculatorProcessor::SolveRPN()
 {
-	std::vector<float> rpn;
 
 	while (!output.empty())
 	{
@@ -364,16 +363,16 @@ float CalculatorProcessor::SolveRPN()
 			front[0] == '9')
 		{
 			float num = std::stof(output.front());
-			rpn.push_back(num);
+			out.push_back(num);
 			output.pop();
 		}
 		else
 		{
 			if (output.front() == "Sin")
 			{
-				float sinx = rpn.back();
-				rpn.pop_back();
-				rpn.push_back(sin(sinx));
+				float sinx = out.back();
+				out.pop_back();
+				out.push_back(sin(sinx));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -383,9 +382,9 @@ float CalculatorProcessor::SolveRPN()
 			}
 			else if (output.front() == "Cos")
 			{
-				float cosx = rpn.back();
-				rpn.pop_back();
-				rpn.push_back(cos(cosx));
+				float cosx = out.back();
+				out.pop_back();
+				out.push_back(cos(cosx));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -395,9 +394,9 @@ float CalculatorProcessor::SolveRPN()
 			}
 			else if (output.front() == "Tan")
 			{
-				float tanx = rpn.back();
-				rpn.pop_back();
-				rpn.push_back(tan(tanx));
+				float tanx = out.back();
+				out.pop_back();
+				out.push_back(tan(tanx));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -405,37 +404,43 @@ float CalculatorProcessor::SolveRPN()
 					break;
 				}
 			}
-			float secondOperand = rpn.back();
-			rpn.pop_back();
-			float firstOperand = rpn.back();
-			rpn.pop_back();
+			float secondOperand = out.back();
+			out.pop_back();
+			float firstOperand = out.back();
+			out.pop_back();
 			if (output.front() == "*")
 			{
-				rpn.push_back(firstOperand * secondOperand);
+				out.push_back(firstOperand * secondOperand);
 				output.pop();
 			}
 
 			else if (output.front() == "/")
 			{
-				rpn.push_back(firstOperand / secondOperand);
+				out.push_back(firstOperand / secondOperand);
 				output.pop();
 			}
 
 			else if (output.front() == "-")
 			{
-				rpn.push_back(firstOperand - secondOperand);
+				out.push_back(firstOperand - secondOperand);
 				output.pop();
 			}
 
 			else if (output.front() == "+")
 			{
-				rpn.push_back(firstOperand + secondOperand);
+				out.push_back(firstOperand + secondOperand);
 				output.pop();
 			}
-
 		}
-
 	}
+	return out.back();
+}
 
-	return rpn.back();
+void CalculatorProcessor::ClearCalculator()
+{
+	if (!tokens.empty())
+	{
+		tokens.clear();
+		out.clear();
+	}
 }

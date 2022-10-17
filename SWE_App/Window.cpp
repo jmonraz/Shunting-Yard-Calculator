@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "ButtonFactory.h"
+#include "CalculatorProcessor.h"
 
 wxBEGIN_EVENT_TABLE(Window, wxFrame)
 wxEND_EVENT_TABLE()
@@ -152,71 +153,23 @@ void Window::OnButtonNegative(wxCommandEvent& evt)
 
 void Window::OnButtonEquals(wxCommandEvent& evt)
 {
+	
+	CalculatorProcessor* calculator = CalculatorProcessor::GetInstance();
+
 	std::string calculation = "";
 	calculation.append(textbox->GetValue());
+	
+	calculator->Calculate(calculation);
 
-	int number1 = 0;
-	int number2 = 0;
-	char oper = 'a';
-	std::string temp;
+	float total = calculator->SolveRPN();
 
-	for (int i = 0; i < calculation.size(); i++)
-	{
+	wxString str;
 
-		if (calculation[0] == '1' || calculation[0] == '2' || calculation[0] == '3' || calculation[0] == '4' || calculation[0] == '5' || calculation[0] == '6' || calculation[0] == '7' || calculation[0] == '8' || calculation[0] == '9' || calculation[0] == '0')
-		{
+	str << total;
 
-			temp += calculation[0];
-			calculation.erase(0, 1);
-			number1 = std::stoi(temp);
-		}
-		if (calculation[0] == '+' || calculation[0] == '-' || calculation[0] == '*' || calculation[0] == '/' || calculation[0] == '%')
-		{
-
-			oper = calculation[0];
-			calculation.erase(0, 1);
-			number2 = std::stoi(calculation);
-			break;
-		}
-
-	}
-
-	int total{ 0 };
-	wxString intString;
-
-	switch (oper)
-	{
-	case '+':
-		total = number1 + number2;
-		intString << total;
-		textbox->Clear();
-		textbox->AppendText(intString);
-		break;
-	case '-':
-		total = number1 - number2;
-		intString << total;
-		textbox->Clear();
-		textbox->AppendText(intString);
-		break;
-	case '*':
-		total = number1 * number2;
-		intString << total;
-		textbox->Clear();
-		textbox->AppendText(intString);
-		break;
-	case '/':
-		total = number1 / number2;
-		intString << total;
-		textbox->Clear();
-		textbox->AppendText(intString);
-		break;
-	case '%':
-		total = number1 % number2;
-		intString << total;
-		textbox->Clear();
-		textbox->AppendText(intString);
-		break;
-	}
+	textbox->Clear();
+	textbox->AppendText(str);
+	calculator->ClearCalculator();
 	evt.Skip();
 }
 

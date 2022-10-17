@@ -9,10 +9,11 @@ class CalculatorProcessor
 {
 private:
 	std::string input = "";
-	std::string out = "";
+	std::string error = "";
 	std::queue<std::string> output;
 	std::stack<std::string> operators;
 	std::vector<std::string> tokens;
+	std::vector<float> out;
 
 	static CalculatorProcessor* _calculatorProcessor;
 	CalculatorProcessor() {}
@@ -24,5 +25,6 @@ public:
 	void GenerateTokens(std::string calc);
 	std::string ConvertString(std::string str);
 	float SolveRPN();
+	void ClearCalculator();
 };
 
