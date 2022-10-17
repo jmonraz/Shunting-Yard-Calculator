@@ -42,6 +42,8 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	ButtonFactory::CreateButton(this, LEFT, "(", wxPoint(190, 460), wxSize(75, 75), font);
 	ButtonFactory::CreateButton(this, RIGHT, ")", wxPoint(275, 460), wxSize(75, 75), font);
 
+
+	
 	this->SetWindowStyle(wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER) & ~(wxMAXIMIZE_BOX));
 }
 
@@ -154,14 +156,12 @@ void Window::OnButtonNegative(wxCommandEvent& evt)
 void Window::OnButtonEquals(wxCommandEvent& evt)
 {
 	
-	CalculatorProcessor* calculator = CalculatorProcessor::GetInstance();
-
 	std::string calculation = "";
 	calculation.append(textbox->GetValue());
 	
-	calculator->Calculate(calculation);
+	CalculatorProcessor::GetInstance()->Calculate(calculation);
 
-	float total = calculator->SolveRPN();
+	float total = CalculatorProcessor::GetInstance()->SolveRPN();
 
 	wxString str;
 
@@ -169,7 +169,7 @@ void Window::OnButtonEquals(wxCommandEvent& evt)
 
 	textbox->Clear();
 	textbox->AppendText(str);
-	calculator->ClearCalculator();
+	CalculatorProcessor::GetInstance()->ClearCalculator();
 	evt.Skip();
 }
 
