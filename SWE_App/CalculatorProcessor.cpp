@@ -5,6 +5,11 @@
 #include <queue>
 #include <vector>
 #include <sstream>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <iterator>
 
 CalculatorProcessor* CalculatorProcessor::_calculatorProcessor = nullptr;
 
@@ -22,7 +27,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 	std::string str = ConvertString(calc);
 
 	GenerateTokens(str);
-
+	
 	for (int i = 0; i < tokens.size(); i++)
 	{
 		if (tokens[i][0] == '0' ||
@@ -75,6 +80,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "*" &&
 						operators.top() == "%")
@@ -82,6 +88,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "*" &&
 						operators.top() == "*")
@@ -89,15 +96,22 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "+" &&
 						operators.top() == "-")
 					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
 						break;
 					}
 					if (tokens[i] == "+" &&
 						operators.top() == "+")
 					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
 						break;
 					}
 					if (tokens[i] == "+" &&
@@ -106,6 +120,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "+" &&
 						operators.top() == "/")
@@ -113,6 +128,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "+" &&
 						operators.top() == "%")
@@ -120,15 +136,22 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "-" &&
 						operators.top() == "+")
 					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
 						break;
 					}
 					if (tokens[i] == "-" &&
 						operators.top() == "-")
 					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
 						break;
 					}
 					if (tokens[i] == "-" &&
@@ -137,6 +160,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "-" &&
 						operators.top() == "/")
@@ -144,6 +168,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "-" &&
 						operators.top() == "%")
@@ -151,6 +176,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "/" &&
 						operators.top() == "+")
@@ -168,6 +194,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "/" &&
 						operators.top() == "%")
@@ -175,6 +202,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "/" &&
 						operators.top() == "/")
@@ -182,6 +210,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "%" &&
 						operators.top() == "+")
@@ -199,6 +228,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "%" &&
 						operators.top() == "/")
@@ -206,6 +236,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
 					}
 					if (tokens[i] == "%" &&
 						operators.top() == "%")
@@ -213,6 +244,11 @@ void CalculatorProcessor::Calculate(std::string calc)
 						std::string value = operators.top();
 						operators.pop();
 						output.push(value);
+						break;
+					}
+					if (operators.empty())
+					{
+						break;
 					}
 				}
 			}
@@ -227,9 +263,12 @@ void CalculatorProcessor::Calculate(std::string calc)
 		{
 			while (operators.top() != "(")
 			{
-				std::string value = operators.top();
-				operators.pop();
-				output.push(value);
+				if(!operators.empty())
+				{
+					std::string value = operators.top();
+					operators.pop();
+					output.push(value);
+				}
 				if (operators.empty())
 				{
 					out = "Error!! Error!!";
@@ -303,4 +342,11 @@ std::string CalculatorProcessor::ConvertString(std::string str)
 		}
 	}
 	return temp;
+}
+
+float CalculatorProcessor::SolveRPN()
+{
+	
+
+	return 0.0f;
 }
