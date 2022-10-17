@@ -346,7 +346,96 @@ std::string CalculatorProcessor::ConvertString(std::string str)
 
 float CalculatorProcessor::SolveRPN()
 {
-	
+	std::vector<float> rpn;
 
-	return 0.0f;
+	while (!output.empty())
+	{
+
+		std::string front = output.front();
+		if (front[0] == '0' ||
+			front[0] == '1' ||
+			front[0] == '2' ||
+			front[0] == '3' ||
+			front[0] == '4' ||
+			front[0] == '5' ||
+			front[0] == '6' ||
+			front[0] == '7' ||
+			front[0] == '8' ||
+			front[0] == '9')
+		{
+			float num = std::stof(output.front());
+			rpn.push_back(num);
+			output.pop();
+		}
+		else
+		{
+			if (output.front() == "Sin")
+			{
+				float sinx = rpn.back();
+				rpn.pop_back();
+				rpn.push_back(sin(sinx));
+				output.pop();
+				continue;
+				if (output.empty())
+				{
+					break;
+				}
+			}
+			else if (output.front() == "Cos")
+			{
+				float cosx = rpn.back();
+				rpn.pop_back();
+				rpn.push_back(cos(cosx));
+				output.pop();
+				continue;
+				if (output.empty())
+				{
+					break;
+				}
+			}
+			else if (output.front() == "Tan")
+			{
+				float tanx = rpn.back();
+				rpn.pop_back();
+				rpn.push_back(tan(tanx));
+				output.pop();
+				continue;
+				if (output.empty())
+				{
+					break;
+				}
+			}
+			float secondOperand = rpn.back();
+			rpn.pop_back();
+			float firstOperand = rpn.back();
+			rpn.pop_back();
+			if (output.front() == "*")
+			{
+				rpn.push_back(firstOperand * secondOperand);
+				output.pop();
+			}
+
+			else if (output.front() == "/")
+			{
+				rpn.push_back(firstOperand / secondOperand);
+				output.pop();
+			}
+
+			else if (output.front() == "-")
+			{
+				rpn.push_back(firstOperand - secondOperand);
+				output.pop();
+			}
+
+			else if (output.front() == "+")
+			{
+				rpn.push_back(firstOperand + secondOperand);
+				output.pop();
+			}
+
+		}
+
+	}
+
+	return rpn.back();
 }
