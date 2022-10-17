@@ -38,26 +38,186 @@ void CalculatorProcessor::Calculate(std::string calc)
 		{
 			output.push(tokens[i]);
 		}
-		if (tokens[i] == "+" ||
-			tokens[i] == "-" ||
-			tokens[i] == "*" ||
-			tokens[i] == "/" ||
-			tokens[i] == "%" ||
-			tokens[i] == ")" ||
-			tokens[i] == "(" ||
-			tokens[i] == "Sin" ||
+		if (tokens[i] == "Sin" ||
 			tokens[i] == "Cos" ||
 			tokens[i] == "Tan")
 		{
 			operators.push(tokens[i]);
-			while (operators.top() == "+" ||
-				operators.top() == "-" ||
-				operators.top() == "/" ||
-				operators.top() == "*" ||
-				operators.top() == "%" )
+		}
+		if (tokens[i] == "+" ||
+			tokens[i] == "-" ||
+			tokens[i] == "*" ||
+			tokens[i] == "/" ||
+			tokens[i] == "%")
+		{
+			if (!operators.empty())
 			{
-				break;
+				while (operators.top() == "+" ||
+					operators.top() == "-" ||
+					operators.top() == "/" ||
+					operators.top() == "*" ||
+					operators.top() == "%" &&
+					operators.top() != "(")
+				{
+					if (tokens[i] == "*" &&
+						operators.top() == "+")
+					{
+						break;
+					}
+					if (tokens[i] == "*" &&
+						operators.top() == "-")
+					{
+						break;
+					}
+					if (tokens[i] == "*" &&
+						operators.top() == "/")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "*" &&
+						operators.top() == "%")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "*" &&
+						operators.top() == "*")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "+" &&
+						operators.top() == "-")
+					{
+						break;
+					}
+					if (tokens[i] == "+" &&
+						operators.top() == "+")
+					{
+						break;
+					}
+					if (tokens[i] == "+" &&
+						operators.top() == "*")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "+" &&
+						operators.top() == "/")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "+" &&
+						operators.top() == "%")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "-" &&
+						operators.top() == "+")
+					{
+						break;
+					}
+					if (tokens[i] == "-" &&
+						operators.top() == "-")
+					{
+						break;
+					}
+					if (tokens[i] == "-" &&
+						operators.top() == "*")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "-" &&
+						operators.top() == "/")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "-" &&
+						operators.top() == "%")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "/" &&
+						operators.top() == "+")
+					{
+						break;
+					}
+					if (tokens[i] == "/" &&
+						operators.top() == "-")
+					{
+						break;
+					}
+					if (tokens[i] == "/" &&
+						operators.top() == "*")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "/" &&
+						operators.top() == "%")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "/" &&
+						operators.top() == "/")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "%" &&
+						operators.top() == "+")
+					{
+						break;
+					}
+					if (tokens[i] == "%" &&
+						operators.top() == "-")
+					{
+						break;
+					}
+					if (tokens[i] == "%" &&
+						operators.top() == "*")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "%" &&
+						operators.top() == "/")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+					if (tokens[i] == "%" &&
+						operators.top() == "%")
+					{
+						std::string value = operators.top();
+						operators.pop();
+						output.push(value);
+					}
+				}
 			}
+
+			operators.push(tokens[i]);
 		}
 		if (tokens[i] == "(")
 		{
@@ -73,31 +233,40 @@ void CalculatorProcessor::Calculate(std::string calc)
 				if (operators.empty())
 				{
 					out = "Error!! Error!!";
+					break;
 				}
 			}
 			if (operators.top() == "(")
 			{
 				operators.pop();
 			}
-			if (operators.top() == "+" ||
-				operators.top() == "-" ||
-				operators.top() == "/" ||
-				operators.top() == "*" ||
-				operators.top() == "%" )
+			if (!operators.empty())
 			{
-				std::string value = operators.top();
-				operators.pop();
-				output.push(value);
+				if (operators.top() == "Sin" ||
+					operators.top() == "Cos" ||
+					operators.top() == "Tan")
+				{
+					std::string value = operators.top();
+					operators.pop();
+					output.push(value);
+				}
 			}
 		}
-		while (!operators.empty())
+
+
+	}
+	while (!operators.empty())
+	{
+		if (operators.top() == ")" || operators.top() == "(")
 		{
-			if (operators.top() != "(")
-			{
-				std::string value = operators.top();
-				operators.pop();
-				output.push(value);
-			}
+			out = "Error!";
+			break;
+		}
+		if (operators.top() != "(")
+		{
+			std::string value = operators.top();
+			operators.pop();
+			output.push(value);
 		}
 	}
 
