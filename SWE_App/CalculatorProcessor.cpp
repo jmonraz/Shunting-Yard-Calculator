@@ -431,6 +431,11 @@ float CalculatorProcessor::SolveRPN()
 				out.push_back(firstOperand + secondOperand);
 				output.pop();
 			}
+			else if (output.front() == "%")
+			{
+				out.push_back((int)firstOperand % (int)secondOperand);
+				output.pop();
+			}
 		}
 	}
 	return out.back();

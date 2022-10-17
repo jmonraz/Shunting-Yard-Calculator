@@ -135,7 +135,7 @@ void Window::OnButtonNegative(wxCommandEvent& evt)
 	cal.append(textbox->GetValue());
 	for (int i = 0; i < cal.size(); i++)
 	{
-		if (cal[i] == '-' || cal[i] == '+' || cal[i] == '*' || cal[i] == '/' || cal[i] == '%' || cal[i] == '-')
+		if (cal[i] == '-' || cal[i] == '+' || cal[i] == '*' || cal[i] == '/' || cal[i] == '%')
 		{
 			if (cal[i + 1] == '-')
 			{
