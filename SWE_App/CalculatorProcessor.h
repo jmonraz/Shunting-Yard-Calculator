@@ -22,6 +22,6 @@ public:
 	static CalculatorProcessor* GetInstance();
 	void Calculate(std::string calc);
 	void GenerateTokens(std::string calc);
-	std::string ConverString(std::string str);
+	std::string ConvertString(std::string str);
 };
 
