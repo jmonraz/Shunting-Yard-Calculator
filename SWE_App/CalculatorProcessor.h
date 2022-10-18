@@ -14,9 +14,9 @@ private:
 	std::stack<std::string> operators;
 	std::vector<std::string> tokens;
 	std::vector<float> out;
-	
-	static CalculatorProcessor* _calculatorProcessor;
 	CalculatorProcessor() {}
+	static CalculatorProcessor* _calculatorProcessor;
+	
 public:
 	CalculatorProcessor(CalculatorProcessor& other) = delete;
 	CalculatorProcessor& operator=(CalculatorProcessor& other) = delete;

@@ -3,6 +3,7 @@
 #include "CalculatorProcessor.h"
 
 wxBEGIN_EVENT_TABLE(Window, wxFrame)
+EVT_CLOSE(Window::OnCloseWindow)
 wxEND_EVENT_TABLE()
 
 #define WINDOW_WIDTH 390
@@ -170,6 +171,12 @@ void Window::OnButtonEquals(wxCommandEvent& evt)
 	textbox->Clear();
 	textbox->AppendText(str);
 	CalculatorProcessor::GetInstance()->ClearCalculator();
+	evt.Skip();
+}
+
+void Window::OnCloseWindow(wxCloseEvent& evt)
+{
+	delete CalculatorProcessor::GetInstance();
 	evt.Skip();
 }
 

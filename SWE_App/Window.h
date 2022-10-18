@@ -18,6 +18,7 @@ public:
 	void OnButtonClear(wxCommandEvent& evt);
 	void OnButtonNegative(wxCommandEvent& evt);
 	void OnButtonEquals(wxCommandEvent& evt);
+	void OnCloseWindow(wxCloseEvent& evt);
 	wxDECLARE_EVENT_TABLE();
 
 	enum BUTTONS
