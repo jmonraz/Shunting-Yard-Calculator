@@ -25,6 +25,7 @@ public:
 	void GenerateTokens(std::string calc);
 	std::string ConvertString(std::string str);
 	float SolveRPN();
+	void ClearError();
 	void ClearCalculator();
 };
 

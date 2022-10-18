@@ -271,7 +271,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 				}
 				if (operators.empty())
 				{
-					error = "Error!! Error!!";
+					error = "error";
 					break;
 				}
 			}
@@ -298,7 +298,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 	{
 		if (operators.top() == ")" || operators.top() == "(")
 		{
-			error = "Error!";
+			error = "error";
 			break;
 		}
 		if (operators.top() != "(")
@@ -438,11 +438,34 @@ float CalculatorProcessor::SolveRPN()
 			}
 		}
 	}
+
+	if (error == "error")
+	{
+		out.clear();
+		out.push_back(0);
+	}
+
 	return out.back();
+}
+
+void CalculatorProcessor::ClearError()
+{
+	tokens.clear();
+	out.clear();
+	for (int i = 0; i < operators.size(); i++)
+	{
+		operators.pop();
+	}
+	for (int i = 0; i < output.size(); i++)
+	{
+		output.pop();
+	}
+	error = "none";
 }
 
 void CalculatorProcessor::ClearCalculator()
 {
+
 	if (!tokens.empty())
 	{
 		tokens.clear();

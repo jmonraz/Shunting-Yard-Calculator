@@ -136,6 +136,8 @@ void Window::OnButtonClear(wxCommandEvent& evt)
 	// Clears the textbox
 	textbox->Clear();
 
+	CalculatorProcessor::GetInstance()->ClearError();
+
 	evt.Skip();
 }
 
