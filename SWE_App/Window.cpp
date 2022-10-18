@@ -10,9 +10,17 @@ wxEND_EVENT_TABLE()
 #define WINDOW_HEIGHT 600
 
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), wxSize(WINDOW_WIDTH, WINDOW_HEIGHT)) {
+
+	// Creates a font to apply it to textbox and buttons
 	wxFont font(16, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+
+	// Creates a textbox at the top of the window
 	textbox = new wxTextCtrl(this, wxID_ANY, "", wxPoint(20, 10), wxSize(330, 40));
+
+	// Sets the font of the textbox
 	textbox->SetFont(font);
+
+	// Code calls the Button Factory to create buttons based on passed parameters
 	// row 1
 	ButtonFactory::CreateButton(this, SIN, "Sin", wxPoint(20, 60), wxSize(75, 75), font);
 	ButtonFactory::CreateButton(this, COS, "Cos", wxPoint(105, 60), wxSize(75, 75), font);
@@ -44,7 +52,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	ButtonFactory::CreateButton(this, RIGHT, ")", wxPoint(275, 460), wxSize(75, 75), font);
 
 
-	
+	// Avoids user from resizing the window and disables minize and maximize window buttons
 	this->SetWindowStyle(wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER) & ~(wxMAXIMIZE_BOX));
 }
 
@@ -54,6 +62,7 @@ Window::~Window() {
 
 void Window::OnButtonClicked(wxCommandEvent& evt)
 {
+	// Gets the button ID and stores it on a BUTTONS enumerator
 	BUTTONS id = (BUTTONS)evt.GetId();
 
 	switch (id)
@@ -119,12 +128,12 @@ void Window::OnButtonClicked(wxCommandEvent& evt)
 		textbox->AppendText("Tan");
 		break;
 	}
-
 	evt.Skip();
 }
 
 void Window::OnButtonClear(wxCommandEvent& evt)
 {
+	// Clears the textbox
 	textbox->Clear();
 
 	evt.Skip();
@@ -156,26 +165,34 @@ void Window::OnButtonNegative(wxCommandEvent& evt)
 
 void Window::OnButtonEquals(wxCommandEvent& evt)
 {
-	
+	// Creates a string to store wxString value from textbox(convert it to std::string)
 	std::string calculation = "";
 	calculation.append(textbox->GetValue());
 	
+	// Calls the Singleton calculator processor instance along with method to calculate the passed string
 	CalculatorProcessor::GetInstance()->Calculate(calculation);
 
+	// Stores the equation solution as a float
 	float total = CalculatorProcessor::GetInstance()->SolveRPN();
 
 	wxString str;
 
+	// Converts float to wxString to append it to the textbox
 	str << total;
 
+	// Clears the textbox and append updated calculation
 	textbox->Clear();
 	textbox->AppendText(str);
+
+	// Clears the data in the tokens vector and output vector to avoid numbers to pile up and give incorrect calculations
 	CalculatorProcessor::GetInstance()->ClearCalculator();
+
 	evt.Skip();
 }
 
 void Window::OnCloseWindow(wxCloseEvent& evt)
 {
+	// Deletes the Singleton when closing main window to avoid memory leak
 	delete CalculatorProcessor::GetInstance();
 	evt.Skip();
 }
