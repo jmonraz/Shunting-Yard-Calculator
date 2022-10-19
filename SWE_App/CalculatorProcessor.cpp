@@ -275,6 +275,11 @@ void CalculatorProcessor::Calculate(std::string calc)
 					break;
 				}
 			}
+			if (operators.empty())
+			{
+				error = "error";
+				break;
+			}
 			if (operators.top() == "(")
 			{
 				operators.pop();
