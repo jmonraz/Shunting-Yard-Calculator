@@ -1,4 +1,5 @@
 #include "ButtonFactory.h"
+#include "Window.h"
 
 wxButton* ButtonFactory::CreateButton(Window* win, wxWindowID id, const wxString str, const wxPoint point, const wxSize size, const wxFont font)
 {

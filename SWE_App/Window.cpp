@@ -175,7 +175,7 @@ void Window::OnButtonEquals(wxCommandEvent& evt)
 	CalculatorProcessor::GetInstance()->Calculate(calculation);
 
 	// Stores the equation solution as a float
-	float total = CalculatorProcessor::GetInstance()->SolveRPN();
+	double total = CalculatorProcessor::GetInstance()->SolveRPN();
 
 	wxString str;
 

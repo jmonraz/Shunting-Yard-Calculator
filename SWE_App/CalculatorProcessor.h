@@ -1,4 +1,5 @@
 #pragma once
+#include "wx/wx.h"
 #include <stack>
 #include <iostream>
 #include <string>
@@ -13,7 +14,7 @@ private:
 	std::queue<std::string> output;
 	std::stack<std::string> operators;
 	std::vector<std::string> tokens;
-	std::vector<float> out;
+	std::vector<double> out;
 	CalculatorProcessor() {}
 	static CalculatorProcessor* _calculatorProcessor;
 	
@@ -24,7 +25,7 @@ public:
 	void Calculate(std::string calc);
 	void GenerateTokens(std::string calc);
 	std::string ConvertString(std::string str);
-	float SolveRPN();
+	double SolveRPN();
 	void ClearError();
 	void ClearCalculator();
 };

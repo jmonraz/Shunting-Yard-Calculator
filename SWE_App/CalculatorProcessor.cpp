@@ -344,7 +344,7 @@ std::string CalculatorProcessor::ConvertString(std::string str)
 	return temp;
 }
 
-float CalculatorProcessor::SolveRPN()
+double CalculatorProcessor::SolveRPN()
 {
 
 	while (!output.empty())
@@ -362,7 +362,7 @@ float CalculatorProcessor::SolveRPN()
 			front[0] == '8' ||
 			front[0] == '9')
 		{
-			float num = std::stof(output.front());
+			double num = std::stof(output.front());
 			out.push_back(num);
 			output.pop();
 		}
@@ -370,9 +370,11 @@ float CalculatorProcessor::SolveRPN()
 		{
 			if (output.front() == "Sin")
 			{
-				float sinx = out.back();
+				double xDegrees = out.back();
 				out.pop_back();
-				out.push_back(sin(sinx));
+				double x = xDegrees * 3.14159 / 180;
+				double result = sin(x);
+				out.push_back(sin(result));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -382,9 +384,11 @@ float CalculatorProcessor::SolveRPN()
 			}
 			else if (output.front() == "Cos")
 			{
-				float cosx = out.back();
+				double xDegrees = out.back();
 				out.pop_back();
-				out.push_back(cos(cosx));
+				double x = xDegrees * 3.14159 / 180;
+				double result = cos(x);
+				out.push_back(cos(result));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -394,9 +398,11 @@ float CalculatorProcessor::SolveRPN()
 			}
 			else if (output.front() == "Tan")
 			{
-				float tanx = out.back();
+				double xDegrees = out.back();
 				out.pop_back();
-				out.push_back(tan(tanx));
+				double x = xDegrees * 3.14159 / 180;
+				double result = tan(x);
+				out.push_back(tan(result));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -404,9 +410,9 @@ float CalculatorProcessor::SolveRPN()
 					break;
 				}
 			}
-			float secondOperand = out.back();
+			double secondOperand = out.back();
 			out.pop_back();
-			float firstOperand = out.back();
+			double firstOperand = out.back();
 			out.pop_back();
 			if (output.front() == "*")
 			{
