@@ -15,6 +15,7 @@ private:
 	std::stack<std::string> operators;
 	std::vector<std::string> tokens;
 	std::vector<double> out;
+	double answer = 0.0;
 	CalculatorProcessor() {}
 	static CalculatorProcessor* _calculatorProcessor;
 	
@@ -22,10 +23,10 @@ public:
 	CalculatorProcessor(CalculatorProcessor& other) = delete;
 	CalculatorProcessor& operator=(CalculatorProcessor& other) = delete;
 	static CalculatorProcessor* GetInstance();
-	void Calculate(std::string calc);
+	double Calculate(std::string calc);
 	void GenerateTokens(std::string calc);
 	std::string ConvertString(std::string str);
-	double SolveRPN();
+	void SolveRPN();
 	void ClearError();
 	void ClearCalculator();
 };

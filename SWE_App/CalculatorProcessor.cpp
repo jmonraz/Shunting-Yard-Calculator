@@ -9,7 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
-#include <iterator>
+
 
 CalculatorProcessor* CalculatorProcessor::_calculatorProcessor = nullptr;
 
@@ -22,8 +22,15 @@ CalculatorProcessor* CalculatorProcessor::GetInstance()
 	return _calculatorProcessor;
 }
 
-void CalculatorProcessor::Calculate(std::string calc)
+double CalculatorProcessor::Calculate(std::string calc)
 {
+	ClearCalculator();
+
+	if (error == "error")
+	{
+		ClearError();
+	}
+
 	std::string str = ConvertString(calc);
 
 	GenerateTokens(str);
@@ -297,7 +304,7 @@ void CalculatorProcessor::Calculate(std::string calc)
 			}
 		}
 
-
+		
 	}
 	while (!operators.empty())
 	{
@@ -313,7 +320,9 @@ void CalculatorProcessor::Calculate(std::string calc)
 			output.push(value);
 		}
 	}
+	SolveRPN();
 
+	return answer;
 }
 
 void CalculatorProcessor::GenerateTokens(std::string calc)
@@ -349,9 +358,9 @@ std::string CalculatorProcessor::ConvertString(std::string str)
 	return temp;
 }
 
-double CalculatorProcessor::SolveRPN()
+void CalculatorProcessor::SolveRPN()
 {
-
+	
 	while (!output.empty())
 	{
 
@@ -377,9 +386,7 @@ double CalculatorProcessor::SolveRPN()
 			{
 				double xDegrees = out.back();
 				out.pop_back();
-				double x = xDegrees * 3.14159 / 180;
-				double result = sin(x);
-				out.push_back(sin(result));
+				out.push_back(sin(xDegrees));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -391,9 +398,7 @@ double CalculatorProcessor::SolveRPN()
 			{
 				double xDegrees = out.back();
 				out.pop_back();
-				double x = xDegrees * 3.14159 / 180;
-				double result = cos(x);
-				out.push_back(cos(result));
+				out.push_back(cos(xDegrees));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -405,9 +410,7 @@ double CalculatorProcessor::SolveRPN()
 			{
 				double xDegrees = out.back();
 				out.pop_back();
-				double x = xDegrees * 3.14159 / 180;
-				double result = tan(x);
-				out.push_back(tan(result));
+				out.push_back(tan(xDegrees));
 				output.pop();
 				continue;
 				if (output.empty())
@@ -452,11 +455,11 @@ double CalculatorProcessor::SolveRPN()
 
 	if (error == "error")
 	{
-		out.clear();
+		error = "none";
 		out.push_back(0);
 	}
 
-	return out.back();
+	answer = out.back();
 }
 
 void CalculatorProcessor::ClearError()

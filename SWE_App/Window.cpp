@@ -172,10 +172,10 @@ void Window::OnButtonEquals(wxCommandEvent& evt)
 	calculation.append(textbox->GetValue());
 	
 	// Calls the Singleton calculator processor instance along with method to calculate the passed string
-	CalculatorProcessor::GetInstance()->Calculate(calculation);
+	double total = CalculatorProcessor::GetInstance()->Calculate(calculation);
 
 	// Stores the equation solution as a float
-	double total = CalculatorProcessor::GetInstance()->SolveRPN();
+	
 
 	wxString str;
 
@@ -187,7 +187,7 @@ void Window::OnButtonEquals(wxCommandEvent& evt)
 	textbox->AppendText(str);
 
 	// Clears the data in the tokens vector and output vector to avoid numbers to pile up and give incorrect calculations
-	CalculatorProcessor::GetInstance()->ClearCalculator();
+	/*CalculatorProcessor::GetInstance()->ClearCalculator();*/
 
 	evt.Skip();
 }
