@@ -22,7 +22,6 @@
 - Under Configuration properties, click advanced
 - For the character set property, set it to Not Set, and click ok
 - In the build menu, click build solution, you may need to do this more than once
-- 
 
 Move your wxWidgets folder to your C drive
 Rename the folder to wxWidgets
