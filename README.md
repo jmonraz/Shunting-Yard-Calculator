@@ -35,6 +35,6 @@ In the build menu, click build solution, you may need to do this more than once
 ## Screenshots/Examples 📷
 
 ### Layout
-![Calculator_layout] 
+![calculator photo](https://user-images.githubusercontent.com/103001374/219457793-d48a0476-6632-46e4-8910-32ad480ddbed.png)
 
 Screenshots/Examples 📷
