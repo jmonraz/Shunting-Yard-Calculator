@@ -1,9 +1,11 @@
 # Shunting Yard Calculator
-> The Shunting-yard Calculator is written in C++ by @TylerJenningsW and @MichaelLillis using the Shunting-yard algorithm and wxWidgets as the primary interface library.
+> The Shunting-yard Calculator is written in C++ by [@jmonraz](https://github.com/jmonraz) using [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting_yard_algorithm) and [wxWidgets](https://www.wxwidgets.org/) as the primary interface library. 
 
 >*NOTE:* This project is meant to be a learning experience as the author had limited knowlege of C++ and wxWidgets library when developing the project
 
 
+
+<img src="https://user-images.githubusercontent.com/36655595/199161106-53c15023-eb94-423f-9e46-41289c02e22b.png" img align="right" width=35%>
 
 ## General Information ℹ️
 
@@ -37,4 +39,9 @@ In the build menu, click build solution, you may need to do this more than once
 ### Layout
 ![calculator photo](https://user-images.githubusercontent.com/103001374/219457793-d48a0476-6632-46e4-8910-32ad480ddbed.png)
 
-Screenshots/Examples 📷
+### Results
+![calculator](https://user-images.githubusercontent.com/103001374/219457857-07710bcd-7da5-45be-a1b3-9bff8e743dca.gif)
+
+
+## Links 🔗
+> [wxWidgets - Library](https://www.wxwidgets.org/) ![development-wxwidgets](https://user-images.githubusercontent.com/95639661/199485724-1726d764-b71b-41eb-ad08-a7f80b6a52a2.png)
